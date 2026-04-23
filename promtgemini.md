@@ -1,33 +1,33 @@
-¡Excelente elección! EasyDiet suena como un proyecto sólido para dominar el ecosistema de Flutter y Firebase. Como desarrollador senior, he estructurado este plan de trabajo integrando Antigravity (una metodología de arquitectura limpia y eficiente) para que tus estudiantes no solo "pichen código", sino que construyan software escalable.
+¡Excelente elección! **EasyDiet** suena como un proyecto sólido para dominar el ecosistema de Flutter y Firebase. Como desarrollador senior, he estructurado este plan de trabajo integrando **Antigravity** (una metodología de arquitectura limpia y eficiente) para que tus estudiantes no solo "pichen código", sino que construyan software escalable.
 
-1. Fase de Preparación: Estructura y Firebase
-1.1 Creación del Proyecto
+---
+
+## 1. Fase de Preparación: Estructura y Firebase
+
+### 1.1 Creación del Proyecto
 En tu terminal, ejecuta:
-
-Bash
+```bash
 flutter create crud_easydiet
 cd crud_easydiet
-1.2 Configuración en la Consola de Firebase
-Ve a Firebase Console.
+```
 
-Crea un proyecto llamado EasyDiet.
+### 1.2 Configuración en la Consola de Firebase
+1. Ve a [Firebase Console](https://console.firebase.google.com/).
+2. Crea un proyecto llamado **EasyDiet**.
+3. En la sección **Firestore Database**, haz clic en "Crear base de datos".
+4. Selecciona "Modo de prueba" (para desarrollo rápido) y elige tu región.
+5. Crea una colección llamada `platillos`. Agrega un documento de prueba con:
+   * `nombre`: "Pollo con Brócoli"
+   * `macronutriente`: "Proteína/Fibra"
+   * `ingredientes`: "Pechuga, Brócoli, Aceite de oliva"
 
-En la sección Firestore Database, haz clic en "Crear base de datos".
+---
 
-Selecciona "Modo de prueba" (para desarrollo rápido) y elige tu región.
+## 2. Integración de Librerías (pubspec.yaml)
 
-Crea una colección llamada platillos. Agrega un documento de prueba con:
+Para que el proyecto sea funcional y moderno, necesitamos las dependencias oficiales de Firebase. Así se modifica tu archivo `pubspec.yaml`:
 
-nombre: "Pollo con Brócoli"
-
-macronutriente: "Proteína/Fibra"
-
-ingredientes: "Pechuga, Brócoli, Aceite de oliva"
-
-2. Integración de Librerías (pubspec.yaml)
-Para que el proyecto sea funcional y moderno, necesitamos las dependencias oficiales de Firebase. Así se modifica tu archivo pubspec.yaml:
-
-YAML
+```yaml
 dependencies:
   flutter:
     sdk: flutter
@@ -36,27 +36,39 @@ dependencies:
   cloud_firestore: ^5.0.0
   # UI y Estilo
   google_fonts: ^6.2.1
-Instalación: Ejecuta flutter pub get en la terminal.
-Configuración de Firebase: Recuerda usar flutterfire configure para vincular tu app automáticamente.
+```
 
-3. Metodología Antigravity: Agentes y Flujo
-En el desarrollo moderno, dividimos el trabajo por Roles y Responsabilidades (Agentes). Aquí el flujo para tus estudiantes:
+**Instalación:** Ejecuta `flutter pub get` en la terminal.
+**Configuración de Firebase:** Recuerda usar `flutterfire configure` para vincular tu app automáticamente.
 
-Agente	Rol	Skill / Responsabilidad
-Arquitecto	Definir Estructura	Crear carpetas y modelos de datos.
-Firebase Lead	Conectividad	Gestionar firebase_core y Firestore.
-UI Designer	Experiencia Visual	Crear widgets con colores atractivos y feedback.
-Logic Dev	CRUD Logic	Implementar los métodos add, update, delete.
-Estructura de Carpetas (Clean Architecture)
-Plaintext
+---
+
+## 3. Metodología Antigravity: Agentes y Flujo
+
+En el desarrollo moderno, dividimos el trabajo por **Roles** y **Responsabilidades** (Agentes). Aquí el flujo para tus estudiantes:
+
+| Agente | Rol | Skill / Responsabilidad |
+| :--- | :--- | :--- |
+| **Arquitecto** | Definir Estructura | Crear carpetas y modelos de datos. |
+| **Firebase Lead** | Conectividad | Gestionar `firebase_core` y Firestore. |
+| **UI Designer** | Experiencia Visual | Crear widgets con colores atractivos y feedback. |
+| **Logic Dev** | CRUD Logic | Implementar los métodos `add`, `update`, `delete`. |
+
+### Estructura de Carpetas (Clean Architecture)
+```text
 lib/
 ├── models/         # El molde: platillo_model.dart
 ├── services/       # El motor: firebase_service.dart
 ├── screens/        # La vista: home_screen.dart y add_edit_screen.dart
 └── main.dart       # Punto de entrada
-4. Implementación del Código (Totalmente Funcional)
-A. El Modelo (lib/models/platillo_model.dart)
-Dart
+```
+
+---
+
+## 4. Implementación del Código (Totalmente Funcional)
+
+### A. El Modelo (`lib/models/platillo_model.dart`)
+```dart
 class Platillo {
   String id;
   String nombre;
@@ -84,8 +96,12 @@ class Platillo {
     };
   }
 }
-B. El Servicio CRUD (lib/services/firebase_service.dart)
-Dart
+```
+
+### B. El Servicio CRUD (`lib/services/firebase_service.dart`)
+
+
+```dart
 import 'cloud_firestore/cloud_firestore.dart';
 import '../models/platillo_model.dart';
 
@@ -107,10 +123,12 @@ class FirebaseService {
   // BORRAR
   Future<void> deletePlatillo(String id) => _db.doc(id).delete();
 }
-C. La Interfaz de Usuario (lib/screens/home_screen.dart)
-He aplicado colores vibrantes: Verde Esmeralda para salud y Naranja para energía.
+```
 
-Dart
+### C. La Interfaz de Usuario (`lib/screens/home_screen.dart`)
+He aplicado colores vibrantes: **Verde Esmeralda** para salud y **Naranja** para energía.
+
+```dart
 import 'package:flutter/material.dart';
 import '../services/firebase_service.dart';
 import '../models/platillo_model.dart';
@@ -201,8 +219,10 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-D. Main (lib/main.dart)
-Dart
+```
+
+### D. Main (`lib/main.dart`)
+```dart
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'screens/home_screen.dart';
@@ -223,17 +243,16 @@ class EasyDietApp extends StatelessWidget {
     );
   }
 }
-5. Práctica Guiada (Resumen para Estudiantes)
-Misión: Construir un gestor de dietas funcional.
+```
 
-El reto Antigravity: Los estudiantes se dividen en 4 equipos (Agentes). Cada uno debe asegurar que su parte del código (Modelo, Servicio, o UI) cumpla con la validación de que ningún campo quede vacío.
+---
 
-Flujo de trabajo:
+## 5. Práctica Guiada (Resumen para Estudiantes)
 
-Paso 1: Conectar Firebase (La base de todo).
-
-Paso 2: Definir el modelo (Sin modelo, no hay datos).
-
-Paso 3: Crear la lógica de servicios (La inteligencia).
-
-Paso 4: Diseñar la interfaz con Hot Reload para ver los cambios de colores en tiempo real.
+1.  **Misión:** Construir un gestor de dietas funcional.
+2.  **El reto Antigravity:** Los estudiantes se dividen en 4 equipos (Agentes). Cada uno debe asegurar que su parte del código (Modelo, Servicio, o UI) cumpla con la validación de que ningún campo quede vacío.
+3.  **Flujo de trabajo:**
+    * **Paso 1:** Conectar Firebase (La base de todo).
+    * **Paso 2:** Definir el modelo (Sin modelo, no hay datos).
+    * **Paso 3:** Crear la lógica de servicios (La inteligencia).
+    * **Paso 4:** Diseñar la interfaz con **Hot Reload** para ver los cambios de colores en tiempo real.
